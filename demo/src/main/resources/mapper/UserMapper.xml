@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhuxx.demo.dao.UserMapper">
+
+    <!-- 查询用户信息 -->
+    <select id="findByUserName" resultType="com.zhuxx.demo.model.User">
+		SELECT * FROM user WHERE username = #{username}
+	</select>
+    <!-- 删除用户信息 -->
+    <delete id="deleteByUserName" parameterType="com.zhuxx.demo.model.User">
+		DELETE FROM user WHERE username = #{username}
+	</delete>
+    <!-- 修改用户信息 -->
+    <update id="updateByUserName" parameterType="com.zhuxx.demo.model.User">
+		UPDATE user set PASSWORD={PASSWORD}  WHERE username = #{username}
+	</update>
+	<!-- 模糊查询用户信息 -->
+	<select id="findUserByUserName" resultType="com.zhuxx.demo.model.User">
+		SELECT * FROM user WHERE username like '%${'username'}%'
+	</select>
+	<!-- 插入用户信息 -->
+	<insert id="insertUser">
+        insert into user(id,username,password,gender,birthday)
+        value(#{id},#{username},#{password},#{gender},#{birthday})
+    </insert>
+</mapper>

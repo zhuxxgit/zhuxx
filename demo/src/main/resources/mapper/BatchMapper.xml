@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhuxx.demo.dao.BatchMapper">
+
+    <!-- 查询客户用户信息 -->
+    <select id="findBatchCustomer" resultType="com.zhuxx.demo.model.BatchCustomer">
+		SELECT Batch.*,customer.username,customer.acno
+		from batch,customer
+		where batch.cus_id = customer.cus_id
+	</select>
+</mapper>
