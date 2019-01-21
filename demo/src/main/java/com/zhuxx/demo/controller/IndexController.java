@@ -19,7 +19,6 @@ import java.text.SimpleDateFormat;
 
 @RestController
 public class IndexController {
-
     @Autowired
     private UserMapper userMapper;
 
@@ -67,14 +66,7 @@ public class IndexController {
         userMapper.insertUser(user);
 
     }
-    /**
-     * 创建日期:2018年4月6日<br/>
-     * 代码创建:黄聪<br/>
-     * 功能描述:通过request的方式来获取到json数据<br/>
-     *
-     * @param jsonParam fastjson对象
-     * @return
-     */
+    /* 功能描述:通过request的方式来获取到json数据<br/>*/
     @ResponseBody
     @RequestMapping(value = "/json/data", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String getByJSON(@RequestBody JSONObject jsonParam) {
@@ -115,11 +107,6 @@ public class IndexController {
     }
 
     /**
-     * 创建日期:2018年4月6日<br/>
-     * 代码创建:黄聪<br/>
-     * 功能描述:通过request来获取到json数据<br/>
-     * @param request
-     * @return
      */
     public JSONObject getJSONParam(HttpServletRequest request){
         JSONObject jsonParam = null;
@@ -175,7 +162,9 @@ public class IndexController {
         String fileName = file.getOriginalFilename();
         System.out.println("fileName-->" + fileName);
         System.out.println("getContentType-->" + contentType);
-        String filePath = request.getSession().getServletContext().getRealPath("imgupload/");
+        String filePath = "C:\\test\\";
+        System.out.println("filePath:"+filePath);
+
         try {
             FileUtil.uploadFile(file.getBytes(), filePath, fileName);
         } catch (Exception e) {
