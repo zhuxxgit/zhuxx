@@ -4,14 +4,16 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.zhuxx.demo.dao.UserMapper;
 import com.zhuxx.demo.model.FileUtil;
+import com.zhuxx.demo.model.FtpFileUtil;
 import com.zhuxx.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -164,13 +166,6 @@ public class IndexController {
         result.put("data", jsonParam);
         return result.toJSONString();
     }
-    //跳转到上传文件的页面
-    @ResponseBody
-    @RequestMapping(value="/gouploadimg", method = RequestMethod.GET)
-    public String goUploadImg() {
-        //跳转到 templates 目录下的 uploadimg.html
-        return "uploadimg";
-    }
 
     //处理文件上传
     @RequestMapping(value="/testuploadimg", method = RequestMethod.POST)
@@ -178,8 +173,8 @@ public class IndexController {
                                           HttpServletRequest request) {
         String contentType = file.getContentType();
         String fileName = file.getOriginalFilename();
-        /*System.out.println("fileName-->" + fileName);
-        System.out.println("getContentType-->" + contentType);*/
+        System.out.println("fileName-->" + fileName);
+        System.out.println("getContentType-->" + contentType);
         String filePath = request.getSession().getServletContext().getRealPath("imgupload/");
         try {
             FileUtil.uploadFile(file.getBytes(), filePath, fileName);
@@ -189,9 +184,5 @@ public class IndexController {
         //返回json
         return "uploadimg success";
     }
-
-
-
-
 
 }
